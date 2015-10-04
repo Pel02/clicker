@@ -1,0 +1,43 @@
+
+<input type="submit" onclick="clickAction()" value="Click" style="width:100px; height:100px"><br/><br/>
+<input type="submit" id="CU1" value="ClickUpgrade_1&#10;+1&#10;$10" onclick="upgradeBody('CU1', 'CU', 1, 10)">
+<input type="submit" id="CU2" value="ClickUpgrade_2&#10;+5&#10;$50" onclick="upgradeBody('CU2', 'CU', 5, 50)">
+<input type="submit" id="AU1" value="AutoUpgrade_1&#10;+1&#10;$100" onclick="upgradeBody('AU1', 'AU', 1, 100)"><br/><br/>
+<input id = "counter" placeholder="0" disabled>
+<div id="label1">Total click power: 0</div>
+<div id="label2">Total autoclick power:	0</div>
+<script type="text/javascript">
+var totalScore = 0;
+	clickUpgrade = 0;
+	autoClickUpgrade = 0;
+	
+
+
+function upgradeBody(name, type, value, price) {
+	if (price <= totalScore) {
+		totalScore -= price;
+		if(type == "CU") {
+			clickUpgrade += value;
+		}
+		if(type == "AU") {
+			autoClickUpgrade += value;
+		}
+		document.getElementById('label1').innerHTML = 'Total click power: ' + clickUpgrade;
+		document.getElementById('label2').innerHTML = 'Total autoclick power: ' + autoClickUpgrade;
+		document.getElementById(name).disabled = true;
+	}
+}
+
+function clickAction() {
+	totalScore += 1 + clickUpgrade;
+	document.getElementById('counter').placeholder = totalScore;	
+}	
+
+var mainHeart = setInterval(function() {
+	totalScore += autoClickUpgrade;
+	document.getElementById('counter').placeholder = totalScore;	
+
+},1000);
+
+
+</script>
